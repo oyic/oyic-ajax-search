@@ -1,0 +1,28 @@
+{
+    "name": "oyic/ajax-full-screen-search",
+    "description": "AJAX-powered full-screen search with CPT filtering and pagination",
+    "type": "wordpress-plugin",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "Chris Alberto",
+            "email": "oyic@outlook.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OYIC\\AjaxSearch\\": "includes/"
+        }
+    },
+    "require": {},
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "post-install-cmd": [
+            "composer dump-autoload -o"
+        ],
+        "post-update-cmd": [
+            "composer dump-autoload -o"
+        ]
+    }
+}

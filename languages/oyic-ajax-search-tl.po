@@ -1,0 +1,85 @@
+# Copyright (C) 2024 OYIC Ajax Search
+# This file is distributed under the same license as the OYIC Ajax Search package.
+# Translators:
+# OYIC Team <info@oyic.com>, 2024
+msgid ""
+msgstr ""
+"Project-Id-Version: OYIC Ajax Search 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/oyic-ajax-search\n"
+"POT-Creation-Date: 2024-08-16 03:47+0000\n"
+"PO-Revision-Date: 2024-08-16 03:47+0000\n"
+"Last-Translator: OYIC Team <info@oyic.com>\n"
+"Language-Team: Filipino\n"
+"Language: tl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: includes/Frontend/SearchPlugin.php:42
+msgid "No results found"
+msgstr "Walang nahanap na resulta"
+
+#: includes/Frontend/SearchPlugin.php:43
+msgid "Searching..."
+msgstr "Naghahanap..."
+
+#: includes/Frontend/SearchPlugin.php:44
+msgid "Type to search..."
+msgstr "Mag-type para maghanap..."
+
+#: includes/Frontend/SearchPlugin.php:59
+msgid "Search term must be at least 2 characters"
+msgstr "Ang search term ay dapat na hindi bababa sa 2 karakter"
+
+#: includes/Admin/Settings.php:367
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Wala kang sapat na pahintulot para ma-access ang page na ito."
+
+#: includes/Frontend/SearchPlugin.php:106
+msgid "Search"
+msgstr "Maghanap"
+
+#: includes/Admin/Settings.php:45
+msgid "OYIC Ajax Search Settings"
+msgstr "OYIC Ajax Search Settings"
+
+#: includes/Admin/Settings.php:46
+msgid "Search Settings"
+msgstr "Search Settings"
+
+#: includes/Admin/Settings.php:52
+msgid "Enable Full Screen Search"
+msgstr "I-enable ang Full Screen Search"
+
+#: includes/Admin/Settings.php:58
+msgid "Search Post Types"
+msgstr "Search Post Types"
+
+#: includes/Admin/Settings.php:64
+msgid "Results Per Page"
+msgstr "Mga Resulta Bawat Page"
+
+#: includes/Admin/Settings.php:70
+msgid "Search Delay (ms)"
+msgstr "Search Delay (ms)"
+
+#: includes/Admin/Settings.php:76
+msgid "Minimum Search Length"
+msgstr "Minimum na Haba ng Search"
+
+#: oyic-ajax-full-screen-search.php:45
+msgid "OYIC Ajax Search requires PHP version 7.4 or higher."
+msgstr "Ang OYIC Ajax Search ay nangangailangan ng PHP version 7.4 o mas mataas."
+
+#: includes/Frontend/SearchPlugin.php:169
+msgid "Search"
+msgstr "Maghanap"
+
+#: includes/Frontend/SearchPlugin.php:301
+msgid "Open search"
+msgstr "Buksan ang search"
+
+#: oyic-ajax-full-screen-search.php:52
+msgid "OYIC Ajax Search requires WordPress version 5.0 or higher."
+msgstr "Ang OYIC Ajax Search ay nangangailangan ng WordPress version 5.0 o mas mataas."

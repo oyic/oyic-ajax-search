@@ -1,0 +1,153 @@
+# Copyright (C) 2024 OYIC Ajax Search
+# This file is distributed under the same license as the OYIC Ajax Search package.
+msgid ""
+msgstr ""
+"Project-Id-Version: OYIC Ajax Search 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/oyic-ajax-search\n"
+"POT-Creation-Date: 2024-08-16 03:47+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2024-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: includes/Frontend/SearchPlugin.php:42
+msgid "No results found"
+msgstr ""
+
+#: includes/Frontend/SearchPlugin.php:43
+msgid "Searching..."
+msgstr ""
+
+#: includes/Frontend/SearchPlugin.php:44
+msgid "Type to search..."
+msgstr ""
+
+#: includes/Frontend/SearchPlugin.php:59
+msgid "Search term must be at least 2 characters"
+msgstr ""
+
+#: includes/Admin/Settings.php:367
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/Frontend/SearchPlugin.php:106
+msgid "Search"
+msgstr ""
+
+#: includes/Admin/Settings.php:45
+msgid "OYIC Ajax Search Settings"
+msgstr ""
+
+#: includes/Admin/Settings.php:46
+msgid "Search Settings"
+msgstr ""
+
+#: includes/Admin/Settings.php:52
+msgid "Enable Full Screen Search"
+msgstr ""
+
+#: includes/Admin/Settings.php:58
+msgid "Search Post Types"
+msgstr ""
+
+#: includes/Admin/Settings.php:64
+msgid "Results Per Page"
+msgstr ""
+
+#: includes/Admin/Settings.php:70
+msgid "Search Delay (ms)"
+msgstr ""
+
+#: includes/Admin/Settings.php:76
+msgid "Minimum Search Length"
+msgstr ""
+
+#: oyic-ajax-full-screen-search.php:45
+msgid "OYIC Ajax Search requires PHP version 7.4 or higher."
+msgstr ""
+
+#: includes/Frontend/SearchPlugin.php:169
+msgid "Search"
+msgstr ""
+
+#: includes/Frontend/SearchPlugin.php:301
+msgid "Open search"
+msgstr ""
+
+#: includes/Admin/Settings.php:380
+msgid "Shortcode Usage"
+msgstr ""
+
+#: includes/Admin/Settings.php:383
+msgid "Copy and paste these shortcodes into your posts, pages, or widgets:"
+msgstr ""
+
+#: includes/Admin/Settings.php:387
+msgid "Basic Search Button"
+msgstr ""
+
+#: includes/Admin/Settings.php:390
+msgid "Copy"
+msgstr ""
+
+#: includes/Admin/Settings.php:394
+msgid "Custom Text"
+msgstr ""
+
+#: includes/Admin/Settings.php:401
+msgid "Icon Only"
+msgstr ""
+
+#: includes/Admin/Settings.php:408
+msgid "Text Only"
+msgstr ""
+
+#: includes/Admin/Settings.php:415
+msgid "With Custom Class"
+msgstr ""
+
+#: includes/Admin/Settings.php:424
+msgid "Shortcode copied to clipboard!"
+msgstr ""
+
+#: includes/Admin/Settings.php:464
+msgid "Copied!"
+msgstr ""
+
+#: includes/Admin/Settings.php:474
+msgid "Failed to copy. Please copy manually."
+msgstr ""
+
+#: includes/Frontend/SearchPlugin.php:83
+msgid "Search term must be at least 2 characters"
+msgstr ""
+
+#: includes/Admin/Settings.php:72
+msgid "Load on All Pages"
+msgstr ""
+
+#: includes/Admin/Settings.php:188
+msgid "Select which post types should be included in the AJAX search. Only post types with title and editor support are shown."
+msgstr ""
+
+#: includes/Admin/Settings.php:212
+msgid "Enable search functionality on all pages"
+msgstr ""
+
+#: includes/Admin/Settings.php:214
+msgid "By default, search scripts only load on the front page and pages with shortcodes. Enable this to load search functionality on all pages (useful if your navigation menu appears site-wide)."
+msgstr ""
+
+#: includes/Admin/Settings.php:443
+msgid "Navigation Menu Setup"
+msgstr ""
+
+#: includes/Admin/Settings.php:446
+msgid "Add search functionality to your website navigation in multiple ways:"
+msgstr ""
+
+#: oyic-ajax-full-screen-search.php:52
+msgid "OYIC Ajax Search requires WordPress version 5.0 or higher."
+msgstr ""
