@@ -29,7 +29,7 @@ Oyic - AJAX Full-Screen Search provides a modern, full-screen search overlay exp
 
 **How to Use:**
 
-1. Use the shortcode `[oyic_ajax_search]` anywhere on your site
+1. Use the shortcode `[oyic_search_button]` anywhere on your site
 2. Or add to navigation menus via Appearance > Menus (see FAQ)
 3. Customize appearance in Settings > Oyic Search
 
@@ -46,7 +46,7 @@ Oyic - AJAX Full-Screen Search provides a modern, full-screen search overlay exp
 1. Upload the plugin files to the `/wp-content/plugins/oyic-ajax-search` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the Settings > Oyic Search screen to configure the plugin
-4. Add the shortcode `[oyic_ajax_search]` to any page, post, or widget area
+4. Add the shortcode `[oyic_search_button]` to any page, post, or widget area
 
 == Frequently Asked Questions ==
 
@@ -54,7 +54,7 @@ Oyic - AJAX Full-Screen Search provides a modern, full-screen search overlay exp
 
 1. Go to Appearance > Menus
 2. Add a "Custom Link" with URL: `#search`
-3. Add the CSS class: `oyic-search-menu-item` to the menu item
+3. Set the link text to "Search"
 4. The plugin will automatically replace the link with your search icon
 
 = Can I customize the search icon? =

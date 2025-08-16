@@ -13,6 +13,9 @@ pids
 node_modules/
 vendor/
 
+# WordPress.org submission - exclude vendor if no external dependencies
+vendor/
+
 # IDE files
 .vscode/
 .idea/
