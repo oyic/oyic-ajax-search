@@ -51,6 +51,12 @@ class Settings {
             'sanitize_callback' => 'rest_sanitize_boolean',
             'default' => false
         ]);
+        
+        register_setting('oyic_afs_settings_group', 'oyic_afs_auto_navigation', [
+            'type' => 'boolean',
+            'sanitize_callback' => 'rest_sanitize_boolean',
+            'default' => true
+        ]);
 
         add_settings_section(
             'oyic_afs_main_section',
@@ -71,6 +77,14 @@ class Settings {
             'oyic_afs_force_load',
             __('Load on All Pages', 'oyic-ajax-search'),
             [self::class, 'render_force_load_field'],
+            'oyic-afs-settings-page',
+            'oyic_afs_main_section'
+        );
+
+        add_settings_field(
+            'oyic_afs_auto_navigation',
+            __('Auto Navigation Integration', 'oyic-ajax-search'),
+            [self::class, 'render_auto_navigation_field'],
             'oyic-afs-settings-page',
             'oyic_afs_main_section'
         );
@@ -212,6 +226,18 @@ class Settings {
         echo ' ' . esc_html__('Enable search functionality on all pages', 'oyic-ajax-search');
         echo '</label>';
         echo '<p class="description">' . esc_html__('By default, search scripts only load on the front page and pages with shortcodes. Enable this to load search functionality on all pages (useful if your navigation menu appears site-wide).', 'oyic-ajax-search') . '</p>';
+    }
+
+    /**
+     * Render auto navigation field
+     */
+    public static function render_auto_navigation_field() {
+        $auto_navigation = get_option('oyic_afs_auto_navigation', true);
+        echo '<label>';
+        echo '<input type="checkbox" name="oyic_afs_auto_navigation" value="1" ' . checked($auto_navigation, true, false) . '>';
+        echo ' ' . esc_html__('Automatically add search icon to navigation menus', 'oyic-ajax-search');
+        echo '</label>';
+        echo '<p class="description">' . esc_html__('When enabled, search icons will automatically appear in common navigation menu locations (primary, header, main, top). Disable this if you prefer to manually add search to specific menus only.', 'oyic-ajax-search') . '</p>';
     }
 
     /**
@@ -475,14 +501,22 @@ class Settings {
                         <!-- Method 1: Automatic -->
                         <div style="border: 2px solid #00a32a; border-radius: 8px; padding: 15px; background: #f0f6fc;">
                             <h4 style="margin-top: 0; color: #00a32a;">🎯 Automatic Integration (Recommended)</h4>
-                            <p><strong>No setup required!</strong> The search icon automatically appears in common navigation menu locations:</p>
+                            <p><strong>Control via settings!</strong> The search icon can automatically appear in common navigation menu locations:</p>
                             <ul style="margin: 10px 0; padding-left: 20px;">
                                 <li>Primary navigation</li>
                                 <li>Header menu</li>
                                 <li>Main menu</li>
                                 <li>Top navigation</li>
                             </ul>
-                            <p style="color: #666; font-style: italic;">Works with most themes that use standard WordPress menu locations.</p>
+                            <?php 
+                            $auto_navigation = get_option('oyic_afs_auto_navigation', true);
+                            if ($auto_navigation) {
+                                echo '<p style="color: #00a32a; font-weight: bold;">✅ Currently ENABLED - Search icons will appear automatically</p>';
+                            } else {
+                                echo '<p style="color: #d63384; font-weight: bold;">❌ Currently DISABLED - Use manual setup below</p>';
+                            }
+                            ?>
+                            <p style="color: #666; font-style: italic;">Toggle this in the "Auto Navigation Integration" setting above.</p>
                         </div>
                         
                         <!-- Method 2: Manual Menu -->
@@ -516,7 +550,9 @@ class Settings {
                             echo '<li><code>' . esc_html($location) . '</code> → ' . ($menu ? esc_html($menu->name) : 'No menu assigned') . '</li>';
                         }
                         echo '</ul>';
-                        echo '<small>The search icon will automatically appear in: primary, main, header, top, navigation, menu-1</small>';
+                        $auto_nav_status = get_option('oyic_afs_auto_navigation', true) ? 'ENABLED' : 'DISABLED';
+                        echo '<small>Auto Navigation Integration: <strong>' . $auto_nav_status . '</strong><br>';
+                        echo 'Search icons will appear in: primary, main, header, top, navigation, menu-1 (if auto-enabled)</small>';
                         echo '</div>';
                     }
                     ?>

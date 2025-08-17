@@ -148,6 +148,18 @@ msgstr ""
 msgid "Add search functionality to your website navigation in multiple ways:"
 msgstr ""
 
+#: includes/Admin/Settings.php:86
+msgid "Auto Navigation Integration"
+msgstr ""
+
+#: includes/Admin/Settings.php:238
+msgid "Automatically add search icon to navigation menus"
+msgstr ""
+
+#: includes/Admin/Settings.php:240
+msgid "When enabled, search icons will automatically appear in common navigation menu locations (primary, header, main, top). Disable this if you prefer to manually add search to specific menus only."
+msgstr ""
+
 #: oyic-ajax-full-screen-search.php:52
 msgid "OYIC Ajax Search requires WordPress version 5.0 or higher."
 msgstr ""

@@ -285,13 +285,17 @@ class SearchPlugin {
      * Add search button to navigation menus
      */
     public function add_search_to_menu($items, $args) {
+        // Check if auto navigation integration is enabled
+        $auto_navigation = get_option('oyic_afs_auto_navigation', true);
+        
         // Get allowed menu locations (filterable)
         $allowed_locations = apply_filters('oyic_search_menu_locations', ['primary', 'main', 'header', 'top', 'navigation', 'menu-1']);
         
         // Check if we should add to this menu
         $should_add = false;
         
-        if (isset($args->theme_location) && in_array($args->theme_location, $allowed_locations)) {
+        // Only automatically add if auto navigation is enabled
+        if ($auto_navigation && isset($args->theme_location) && in_array($args->theme_location, $allowed_locations)) {
             $should_add = true;
         }
         
