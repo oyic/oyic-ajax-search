@@ -60,19 +60,137 @@ if (!defined('OYIC_AFS_VERSION')) {
 define('OYIC_AFS_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('OYIC_AFS_PLUGIN_URL', plugin_dir_url(__FILE__));
 
-// Load Composer autoloader
+// Load Composer autoloader or use fallback
 if (file_exists(OYIC_AFS_PLUGIN_DIR . 'vendor/autoload.php')) {
     require_once OYIC_AFS_PLUGIN_DIR . 'vendor/autoload.php';
 } else {
-    add_action('admin_notices', function () {
-        echo '<div class="notice notice-error"><p>';
-        printf(
-            esc_html__('Oyic Search: Missing autoloader. Please run %s in the plugin directory.', 'oyic-ajax-search'),
-            '<code>composer install</code>'
-        );
-        echo '</p></div>';
+    // Fallback autoloader for PSR-4
+    spl_autoload_register(function ($class) {
+        $prefix = 'OYIC\\AjaxSearch\\';
+        $base_dir = OYIC_AFS_PLUGIN_DIR . 'includes/';
+        
+        $len = strlen($prefix);
+        if (strncmp($prefix, $class, $len) !== 0) {
+            return;
+        }
+        
+        $relative_class = substr($class, $len);
+        $file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
+        
+        if (file_exists($file)) {
+            require $file;
+        }
     });
-    return;
+    
+    // Show notice for development environments
+    if (defined('WP_DEBUG') && WP_DEBUG) {
+        add_action('admin_notices', function () {
+            echo '<div class="notice notice-warning"><p>';
+            printf(
+                esc_html__('Oyic Search: Using fallback autoloader. For better performance, run %s in the plugin directory.', 'oyic-ajax-search'),
+                '<code>composer install</code>'
+            );
+            echo '</p></div>';
+        });
+    }
+}
+
+/**
+ * Install dependencies if needed
+ */
+function oyic_ajax_search_install_dependencies() {
+    $plugin_dir = plugin_dir_path(__FILE__);
+    
+    // Check if vendor directory exists and has autoload
+    if (!file_exists($plugin_dir . 'vendor/autoload.php')) {
+        // Try to run composer install
+        if (oyic_ajax_search_run_composer_install($plugin_dir)) {
+            error_log('OYIC Ajax Search: Composer dependencies installed successfully.');
+        } else {
+            error_log('OYIC Ajax Search: Composer install failed or not available. Plugin will use fallback autoloading.');
+        }
+    }
+    
+    // Check if node_modules exists (for development environments)
+    if (file_exists($plugin_dir . 'package.json') && !file_exists($plugin_dir . 'node_modules')) {
+        if (oyic_ajax_search_run_npm_install($plugin_dir)) {
+            error_log('OYIC Ajax Search: NPM dependencies installed successfully.');
+        } else {
+            error_log('OYIC Ajax Search: NPM install failed or not available. CSS/JS files should be pre-built.');
+        }
+    }
+}
+
+/**
+ * Run composer install
+ */
+function oyic_ajax_search_run_composer_install($plugin_dir) {
+    // Check if composer is available and safe to execute
+    if (!function_exists('exec') || ini_get('safe_mode')) {
+        return false;
+    }
+    
+    // Check if composer is available
+    $composer_commands = ['composer', 'composer.phar', '/usr/local/bin/composer'];
+    
+    foreach ($composer_commands as $composer) {
+        // Test if command exists
+        $test_command = sprintf('command -v %s 2>/dev/null', escapeshellarg($composer));
+        exec($test_command, $test_output, $test_return);
+        
+        if ($test_return === 0) {
+            $command = sprintf('cd %s && COMPOSER_DISABLE_XDEBUG_WARN=1 %s install --no-dev --optimize-autoloader --quiet --no-interaction 2>/dev/null', 
+                escapeshellarg($plugin_dir), 
+                escapeshellarg($composer)
+            );
+            
+            $output = [];
+            $return_code = 0;
+            exec($command, $output, $return_code);
+            
+            if ($return_code === 0) {
+                return true;
+            }
+        }
+    }
+    
+    return false;
+}
+
+/**
+ * Run npm install
+ */
+function oyic_ajax_search_run_npm_install($plugin_dir) {
+    // Check if npm is available and safe to execute
+    if (!function_exists('exec') || ini_get('safe_mode')) {
+        return false;
+    }
+    
+    // Check if npm is available
+    $npm_commands = ['npm', '/usr/local/bin/npm'];
+    
+    foreach ($npm_commands as $npm) {
+        // Test if command exists
+        $test_command = sprintf('command -v %s 2>/dev/null', escapeshellarg($npm));
+        exec($test_command, $test_output, $test_return);
+        
+        if ($test_return === 0) {
+            $command = sprintf('cd %s && %s install --production --silent --no-audit --no-fund 2>/dev/null', 
+                escapeshellarg($plugin_dir), 
+                escapeshellarg($npm)
+            );
+            
+            $output = [];
+            $return_code = 0;
+            exec($command, $output, $return_code);
+            
+            if ($return_code === 0) {
+                return true;
+            }
+        }
+    }
+    
+    return false;
 }
 
 // Plugin activation hook
@@ -87,6 +205,9 @@ register_activation_hook(__FILE__, function() {
         deactivate_plugins(plugin_basename(__FILE__));
         wp_die(__('OYIC Ajax Search requires PHP version 7.4 or higher.', 'oyic-ajax-search'));
     }
+    
+    // Install dependencies
+    oyic_ajax_search_install_dependencies();
 });
 
 // Initialize plugin
