@@ -139,7 +139,8 @@ function oyic_ajax_search_run_composer_install($plugin_dir) {
         exec($test_command, $test_output, $test_return);
         
         if ($test_return === 0) {
-            $command = sprintf('cd %s && COMPOSER_DISABLE_XDEBUG_WARN=1 %s install --no-dev --optimize-autoloader --quiet --no-interaction 2>/dev/null', 
+            // Suppress all output and errors completely
+            $command = sprintf('cd %s && COMPOSER_DISABLE_XDEBUG_WARN=1 PHP_INI_SCAN_DIR= php -d error_reporting=0 -d display_errors=0 -d log_errors=0 %s install --no-dev --optimize-autoloader --quiet --no-interaction --no-scripts >/dev/null 2>&1', 
                 escapeshellarg($plugin_dir), 
                 escapeshellarg($composer)
             );

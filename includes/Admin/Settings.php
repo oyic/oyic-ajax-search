@@ -133,50 +133,7 @@ class Settings {
      * Render main section description
      */
     public static function render_main_section() {
-        echo '<div style="background: #fff; border: 1px solid #c3c4c7; border-radius: 4px; padding: 15px; margin-bottom: 20px;">';
-        echo '<h3 style="margin-top: 0;">' . esc_html__('How to Use', 'oyic-ajax-search') . '</h3>';
-        echo '<p>' . esc_html__('Use the shortcode below to display the search icon anywhere on your site:', 'oyic-ajax-search') . '</p>';
-        echo '<div style="background: #f6f7f7; border: 1px solid #dcdcde; border-radius: 4px; padding: 10px; font-family: Consolas, Monaco, monospace; font-size: 14px; position: relative;">';
-        echo '<code id="oyic-shortcode" style="user-select: all; cursor: text;">[oyic_ajax_search]</code>';
-        echo '<button type="button" onclick="copyShortcode()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: #2271b1; color: white; border: none; padding: 4px 8px; border-radius: 3px; font-size: 12px; cursor: pointer;">' . esc_html__('Copy', 'oyic-ajax-search') . '</button>';
-        echo '</div>';
-        echo '<p style="margin-bottom: 0;"><strong>' . esc_html__('For Navigation Menu:', 'oyic-ajax-search') . '</strong></p>';
-        echo '<div style="background: #f0f6fc; border: 1px solid #c3c4c7; border-radius: 4px; padding: 10px; margin: 10px 0;">';
-        echo '<p style="margin: 0 0 10px 0;"><strong>' . esc_html__('Method 1: Using Menu Editor (Recommended)', 'oyic-ajax-search') . '</strong></p>';
-        echo '<ol style="margin: 0;">';
-        echo '<li>Go to <a href="' . admin_url('nav-menus.php') . '">Appearance > Menus</a></li>';
-        echo '<li>Add any menu item (Custom Link, Page, etc.)</li>';
-        echo '<li>Check "Make this a search icon" checkbox in the menu item</li>';
-        echo '<li>Save Menu</li>';
-        echo '</ol>';
-        echo '</div>';
-        echo '<div style="background: #fff8e1; border: 1px solid #c3c4c7; border-radius: 4px; padding: 10px; margin: 10px 0;">';
-        echo '<p style="margin: 0 0 10px 0;"><strong>' . esc_html__('Method 2: Manual CSS Class', 'oyic-ajax-search') . '</strong></p>';
-        echo '<ol style="margin: 0;">';
-        echo '<li>Add a Custom Link with URL: <code>#search</code></li>';
-        echo '<li>Enable "CSS Classes" in Screen Options</li>';
-        echo '<li>Add CSS Class: <code>oyic-search-menu-item</code></li>';
-        echo '<li>Save Menu</li>';
-        echo '</ol>';
-        echo '</div>';
-        echo '</div>';
-        
-        echo '<script>
-        function copyShortcode() {
-            const shortcodeElement = document.getElementById("oyic-shortcode");
-            const text = shortcodeElement.textContent;
-            navigator.clipboard.writeText(text).then(function() {
-                const button = event.target;
-                const originalText = button.textContent;
-                button.textContent = "' . esc_js(__('Copied!', 'oyic-ajax-search')) . '";
-                button.style.background = "#00a32a";
-                setTimeout(function() {
-                    button.textContent = originalText;
-                    button.style.background = "#2271b1";
-                }, 2000);
-            });
-        }
-        </script>';
+        // Section removed as requested
     }
 
     /**
@@ -244,9 +201,9 @@ class Settings {
      * Render background color field
      */
     public static function render_bg_color_field() {
-        $bg_color = get_option('oyic_afs_bg_color', '#ffffff');
+        $bg_color = get_option('oyic_afs_bg_color', '#000000');
         echo '<input type="color" name="oyic_afs_bg_color" value="' . esc_attr($bg_color) . '" />';
-        echo '<p class="description">' . esc_html__('Choose the background color for the search overlay.', 'oyic-ajax-search') . '</p>';
+        echo '<p class="description">' . esc_html__('Choose the overlay background color. This will be combined with the opacity setting below.', 'oyic-ajax-search') . '</p>';
     }
 
     /**

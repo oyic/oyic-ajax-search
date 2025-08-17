@@ -94,9 +94,13 @@ class SearchPlugin {
             true
         );
         
-        // Get overlay settings
-        $overlay_bg = get_option('oyic_afs_bg_color', 'rgba(0, 0, 0, 0.8)');
-        $overlay_opacity = get_option('oyic_afs_bg_opacity', '1');
+        // Get overlay settings and convert to proper format
+        $bg_color = get_option('oyic_afs_bg_color', '#000000');
+        $bg_opacity = get_option('oyic_afs_bg_opacity', '0.8');
+        
+        // Convert hex color to rgba with opacity
+        $overlay_bg = self::hex_to_rgba($bg_color, floatval($bg_opacity));
+        $overlay_opacity = '1'; // Always 1 since opacity is built into rgba
         
         wp_localize_script('oyic-ajax-search-script', 'oyic_ajax_search', [
             'ajax_url' => admin_url('admin-ajax.php'),
@@ -214,6 +218,27 @@ class SearchPlugin {
         <?php
     }
     
+    /**
+     * Convert hex color to rgba with opacity
+     */
+    private static function hex_to_rgba($hex, $opacity) {
+        // Remove # if present
+        $hex = ltrim($hex, '#');
+        
+        // Convert hex to rgb
+        if (strlen($hex) === 3) {
+            $r = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
+            $g = hexdec(substr($hex, 1, 1) . substr($hex, 1, 1));
+            $b = hexdec(substr($hex, 2, 1) . substr($hex, 2, 1));
+        } else {
+            $r = hexdec(substr($hex, 0, 2));
+            $g = hexdec(substr($hex, 2, 2));
+            $b = hexdec(substr($hex, 4, 2));
+        }
+        
+        return sprintf('rgba(%d, %d, %d, %.2f)', $r, $g, $b, $opacity);
+    }
+
     /**
      * Get search icon HTML
      */
